@@ -10,9 +10,9 @@ weight: 200
 
 
 
-XAPs IMDG may store file and large objects in memory (audio files/movie files/large xml files). The GigaSpaces internal communication protocol implementation split large data objects passed between different remote processes (i.e. client and space) into multiple chunks (64K size by default). This provides scalable and stable system allowing clients to write and read large space objects. You may use any client interface; Java, .Net and C++ leveraging any of the supported data access API with large objects: [GigaSpace]({%currentjavaurl%}/the-gigaspace-interface.html) , [GigaMap]({%currentjavaurl%}/map-api.html) , [JDBC Driver]({%currentjavaurl%}/jdbc-driver.html), [JMS]({%currentjavaurl%}/messaging-support.html), [JPA]({%currentjavaurl%}/jpa-api.html), [Document]({%currentjavaurl%}/document-api.html).
+XAP's IMDG may store file and large objects in memory (audio files/movie files/large xml files). The GigaSpaces internal communication protocol implementation splits large data objects passed between different remote processes (i.e. client and space) into multiple chunks (64K size by default). This provides a scalable and stable system allowing clients to write and read large space objects. You may use any client interface; Java, .Net and C++ leveraging any of the supported data access APIs with large objects: [GigaSpace]({%currentjavaurl%}/the-gigaspace-interface.html) , [GigaMap]({%currentjavaurl%}/map-api.html) , [JDBC Driver]({%currentjavaurl%}/jdbc-driver.html), [JMS]({%currentjavaurl%}/messaging-support.html), [JPA]({%currentjavaurl%}/jpa-api.html), [Document]({%currentjavaurl%}/document-api.html).
 
-In order to store large files in memory, you should simply load the file into the relevant Data type (byte array , blob) and use the relevant API to write the data into the space. Large objects are treated like any other objects stored within the space.
+In order to store large files in memory, you should simply load the file into the relevant Data type (e.g. byte array, blob) and use the relevant API to write the data into the space. Large objects are treated like any other objects stored within the space.
 
 {% tip %}
 The `com.gs.transport_protocol.lrmi.maxBufferSize` system property controls the chunk size. See the [Communication Protocol](./tuning-communication-protocol.html#maxBufferSize) for details.
@@ -20,10 +20,10 @@ The `com.gs.transport_protocol.lrmi.maxBufferSize` system property controls the 
 
 ## Memory Allocation Behavior
 
-During the data transfer activity the space leverage non-heap buffers to transfer the data (NIO direct buffer) into the target process, but due-to the serialization behavior, the entire data object maintained for a short duration within the JVM heap. These in-transit buffers will be cleared once the JVM garbage collector will request these (weak reference). To allow this activity to have enough memory headroom, you should increase the Space and client heap size to accommodate these transit buffers. The heap size headroom required would be:
+During the data transfer activity the space leverages non-heap buffers to transfer the data (NIO direct buffer) into the target process, but due to the serialization behavior, the entire data object is maintained for a short duration within the JVM heap. These in-transit buffers will be cleared once the JVM garbage collector requests them (weak reference). To allow this activity to have enough memory headroom, you should increase the Space and client heap size to accommodate these transit buffers. The heap size headroom required would be:
 
 {% highlight java %}
-Maximum number of concurrent connections X Maximum Object size
+Maximum number of concurrent connections * Maximum Object size
 {% endhighlight %}
 
 # Large Objects Examples
