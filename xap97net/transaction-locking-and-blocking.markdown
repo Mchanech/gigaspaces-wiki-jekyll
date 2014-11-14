@@ -17,7 +17,7 @@ XAP provides two strategies for locking objects: Optimistic and pessimistic. Bot
 
 # Blocking Rules Overview
 
-Space operations have rules that specify whether they should be blocked if another operation takes place in parallel. Space operations can accept a transaction object, and this object can effect locking behavior.
+Space operations have rules that specify whether they should be blocked if another operation takes place in parallel. Space operations can accept a transaction object, and this object can affect locking behavior.
 
 These rules should be considered very carefully when building space-based applications, especially in scenarios with many concurrent users.
 The following table describes space operation blocking rules. The operations listed on the top ("Operation B") are blocked, or allowed, when performed in conjunction with operations listed on the left ("Operation A").
@@ -39,7 +39,7 @@ TX denotes transaction, and it is assumed that operations A are called under a d
 
 A read lock guarantees that an object is not changed while you are looking at it. It is useful when you want to look at an object but not change it.
 
-A read lock provides its guarantee by blocking all other requests for an update and take operation; it does not block other read requests. A request for a read operation is only blocked if the object already has an update operation.
+A read lock provides its guarantee by blocking all other requests for an update or take operation; it does not block other read requests. A request for a read operation is only blocked if the object already has an update operation.
 
 # Update Operation
 
